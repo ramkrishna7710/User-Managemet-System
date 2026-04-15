@@ -1,0 +1,77 @@
+<div class="container mt-5">
+
+  <div class="card shadow p-4">
+
+    <h3 class="text-center mb-4">👨‍💼 Admin Dashboard</h3>
+
+    <!-- Add User -->
+    <div class="row g-2 mb-3">
+      <div class="col">
+        <input [(ngModel)]="newUser.name" placeholder="Name" class="form-control">
+      </div>
+
+      <div class="col">
+        <input [(ngModel)]="newUser.email" placeholder="Email" class="form-control">
+      </div>
+
+      <div class="col">
+        <select [(ngModel)]="newUser.role" class="form-select">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <button (click)="addUser()" class="btn btn-success w-100">
+          ➕ Add
+        </button>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Edit user -->
+    <div *ngIf="editingUser" class="card p-3 mb-3">
+
+        <h5>Edit User</h5>
+
+        <input [(ngModel)]="editingUser.name" class="form-control mb-2">
+        <input [(ngModel)]="editingUser.email" class="form-control mb-2">
+
+        <select [(ngModel)]="editingUser.role" class="form-select mb-2">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <button (click)="updateUser()" class="btn btn-primary w-100">
+          Update
+        </button>
+
+    </div>
+
+    <!-- User List -->
+    <div *ngFor="let user of users" class="card mb-2 p-3 shadow-sm">
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+          <strong>{{user.name}}</strong><br>
+          <small>{{user.email}}</small><br>
+          <span class="badge bg-primary">{{user.role}}</span>
+        </div>
+
+        <button (click)="startEdit(user)" class="btn btn-warning btn-sm me-2">
+          ✏️ Edit
+        </button>
+
+        <button (click)="deleteUser(user._id)" class="btn btn-outline-danger btn-sm">
+          🗑 Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -9,4 +9,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('user-management-system');
+
+  logout() {
+    localStorage.clear();
+    window.location.href = '/login';
+  }
 }
