@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.css',
 })
 export class Login {
-    email = '';
+  email = '';
   password = '';
 
   constructor(private auth: Auth, private router: Router) {}
@@ -23,8 +23,10 @@ export class Login {
       email: this.email,
       password: this.password
     }).subscribe((res: any) => {
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('role', res.role);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('role', res.role);
+      }
 
       if (res.role === 'admin') {
         this.router.navigate(['/admin/users']);
@@ -33,4 +35,5 @@ export class Login {
       }
     });
   }
+  
 }
